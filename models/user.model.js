@@ -17,9 +17,10 @@ const userSchema = new Schema(
       trim: true,
       required: true,
       validate(value) {
-            if (!validator.isEmail(value)) {
-                throw new Error('Please fill in the proper email');
-            }
+        if (!validator.isEmail(value)) {
+          throw new Error('Please fill in the proper email');
+        }
+      },
     },
     password: {
       type: String,
@@ -40,6 +41,12 @@ const userSchema = new Schema(
     timestamps: true,
   }
 );
+
+userSchema.virtual('books', {
+  ref: 'Book',
+  localField: '_id',
+  foreignField: 'user',
+});
 
 userSchema.methods.generateAuthToken = async function () {
   const user = this;
