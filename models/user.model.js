@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
-// const validator = require('validator');
+const jwt = require('jsonwebtoken');
+const validator = require('validator');
 
 const Schema = mongoose.Schema;
 
@@ -15,6 +16,10 @@ const userSchema = new Schema(
       unique: true,
       trim: true,
       required: true,
+      validate(value) {
+            if (!validator.isEmail(value)) {
+                throw new Error('Please fill in the proper email');
+            }
     },
     password: {
       type: String,
