@@ -12,9 +12,8 @@ const bookSchema = new Schema(
       required: true,
       trim: true,
     },
-    data_published: {
-      type: Boolean,
-      default: false,
+    date_published: {
+      type: new Date(),
     },
     user: {
       type: mongoose.Schema.Types.ObjectId,
